@@ -1,0 +1,74 @@
+﻿@page "{UserId:int}"
+@model Teletter.Pages.Profile.IndexModel
+@{
+}
+
+<div class="row">
+    <div class="col-5">
+        <h2>@Model.user.UserName</h2>
+        <h2>@Model.user.Email</h2>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <form method="post" id="tweetForm">
+                <div class="form-group">
+                    <textarea id="tweetContent" rows="5" placeholder="What's on your mind..." class="form-control"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Tweet</button>
+            </form>
+        }
+    </div>
+
+    <div class="col-7">
+        @if (Model.tweets == null)
+        {
+            <p>There is no tweets!</p>
+        }
+        else
+        {
+            foreach (var tweet in Model.tweets)
+            {
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @Model.user.UserName
+                            <small>
+                                <span class="text-muted">
+                                    <time datetime="@tweet.CreatedAt">9h</time>
+                                </span>
+                            </small>
+                        </h5>
+                        <p class="card-text">@tweet.Content</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        async function postData(url = '', data = {}) {
+            const content = document.getElementById('tweetContent').value;
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(content)
+            };
+            event.preventDefault();
+
+            const response = fetch("@Model.user.UserId", options);
+            @*return response.json();*@
+
+            console.log('Hello back', content);
+        }
+
+        const form = document.getElementById('tweetForm');
+        form.addEventListener('submit', postData);
+    </script>
+}

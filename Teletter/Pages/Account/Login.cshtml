@@ -1,0 +1,25 @@
+﻿@page
+@model Teletter.Pages.Account.LoginModel
+@{
+}
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Input.Email">Email Address</label>
+        <input asp-for="Input.Email" class="form-control" placeholder="Enter email" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.Password">Password</label>
+        <input asp-for="Input.Password" class="form-control" type="password" placeholder="Password" />
+    </div>
+    <div class="form-group">
+        <div class="checkbox">
+            <label asp-for="Input.RememberMe">
+                <input asp-for="Input.RememberMe" />
+                @Html.DisplayNameFor(m => m.Input.RememberMe)
+            </label>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>

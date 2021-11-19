@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teletter", "Teletter\Teletter.csproj", "{79C02139-7D88-4BA0-9FD7-2405D376C589}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teletter", "Teletter\Teletter.csproj", "{79C02139-7D88-4BA0-9FD7-2405D376C589}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teletter.Core", "Teletter.Core\Teletter.Core.csproj", "{29D73005-0082-4DF0-8C8E-F8F1FD704B38}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teletter.Data", "Teletter.Data\Teletter.Data.csproj", "{CADC7ADB-3E8F-4FE7-8A31-150D70FFF39E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{79C02139-7D88-4BA0-9FD7-2405D376C589}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79C02139-7D88-4BA0-9FD7-2405D376C589}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79C02139-7D88-4BA0-9FD7-2405D376C589}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29D73005-0082-4DF0-8C8E-F8F1FD704B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29D73005-0082-4DF0-8C8E-F8F1FD704B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29D73005-0082-4DF0-8C8E-F8F1FD704B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29D73005-0082-4DF0-8C8E-F8F1FD704B38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CADC7ADB-3E8F-4FE7-8A31-150D70FFF39E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CADC7ADB-3E8F-4FE7-8A31-150D70FFF39E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CADC7ADB-3E8F-4FE7-8A31-150D70FFF39E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CADC7ADB-3E8F-4FE7-8A31-150D70FFF39E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
