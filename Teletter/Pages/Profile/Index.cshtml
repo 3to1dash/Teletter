@@ -19,10 +19,10 @@
         }
     </div>
 
-    <div class="col-7">
-        @if (Model.tweets == null)
+    <div class="col-7 profile-tweets">
+        @if (!Model.tweets.Any())
         {
-            <p>There is no tweets!</p>
+            <p class="no-tweets">There is no tweets!</p>
         }
         else
         {
@@ -56,16 +56,70 @@
             const options = {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    RequestVerificationToken: document.getElementsByName("__RequestVerificationToken")[0].value,
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
                 },
-                body: JSON.stringify(content)
+                body: JSON.stringify({ Content: content })
             };
+
+            fetch("@Model.user.UserId", options)
+                .then(response => response.json())
+                .then(data => addTweet(data));
             event.preventDefault();
+        }
 
-            const response = fetch("@Model.user.UserId", options);
-            @*return response.json();*@
+        function addTweet(data) {
+            let card = document.createElement('div');
+            card.setAttribute('class', 'card mb-3');
 
-            console.log('Hello back', content);
+            let cardBody = document.createElement('div');
+            cardBody.setAttribute('class', 'card-body')
+
+            let cardTitle = document.createElement('h5');
+            cardTitle.setAttribute('class', 'card-title');
+
+            let time = document.createElement('time');
+            time.setAttribute('datetime', data.createdAt);
+            time.innerText = "9h";
+
+            let span = document.createElement('span');
+            span.setAttribute('class', 'text-muted');
+            span.append(time);
+
+            let small = document.createElement('small');
+            small.append(span);
+            cardTitle.append(document.createTextNode(' @Model.user.UserName '));
+            cardTitle.append(small);
+
+            let cardText = document.createElement('p');
+            cardText.setAttribute('class', 'card-text');
+            cardText.innerText = data.content;
+
+            let cardLink1 = document.createElement('a');
+            cardLink1.setAttribute('href', '#')
+            cardLink1.setAttribute('class', 'card-link');
+            cardLink1.innerText = "Card link";
+
+            let cardLink2 = document.createElement('a');
+            cardLink2.setAttribute('href', '#')
+            cardLink2.setAttribute('class', 'card-link');
+            cardLink2.innerText = "Another link";
+
+            cardBody.append(cardTitle);
+            cardBody.append(cardText);
+            cardBody.append(cardLink1);
+            cardBody.append(cardLink2);
+            card.append(cardBody);
+            card.classList.add('show');
+
+            let noTweet = document.querySelector('.no-tweets');
+            if (noTweet !== null) {
+                noTweet.parentNode.removeChild(noTweet);
+            }
+
+            let tweetContainer = document.querySelector('.profile-tweets');
+            tweetContainer.prepend(card);
         }
 
         const form = document.getElementById('tweetForm');

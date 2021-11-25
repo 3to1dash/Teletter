@@ -7,7 +7,8 @@ namespace Teletter.Data
 {
     public interface ITweetRepository
     {
-        void saveTweet(int userId, string content);
+        Tweet saveTweet(int userId, string content);
+        Tweet getTheLastestAddedTweet();
         List<Tweet> getTweetsByUserId(int userId);
     }
 }

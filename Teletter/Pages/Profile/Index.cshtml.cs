@@ -24,22 +24,18 @@ namespace Teletter.Pages.Profile
         public User user { get; set; }
         public List<Tweet> tweets { get; set; }
 
-        //[BindProperty]
-        public InputModel Input { get; set; }
-
         public void OnGet(int UserId)
         {
             user = _userRepository.GetUserById(UserId);
             tweets = _tweetRepository.getTweetsByUserId(UserId);
         }
 
-        public ActionResult OnPost()
+        public JsonResult OnPost([FromBody] InputModel input)
         {
             var currentUser = this.User;
             var userId = Int32.Parse(currentUser.FindFirst(ClaimTypes.NameIdentifier).Value);
-            _tweetRepository.saveTweet(userId, Input.Content);
-            user = _userRepository.GetUserById(userId);
-            return LocalRedirect($"/Profile/{userId}");
+            Tweet tweet = _tweetRepository.saveTweet(userId, input.Content);
+            return new JsonResult(tweet);
         }
 
         public class InputModel

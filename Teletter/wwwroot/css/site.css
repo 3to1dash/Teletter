@@ -24,6 +24,21 @@ a {
   border-color: #1861ac;
 }
 
+@keyframes prepend-animate {
+    from {
+		transform: scaleY(0);
+		opacity: 0;
+	}
+	to {
+		transform: scaleY(1);
+		opacity: 1;
+	}
+}
+.show {
+	transform-origin: 50% 0;
+    animation: prepend-animate .3s linear;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

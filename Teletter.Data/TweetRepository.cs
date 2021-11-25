@@ -31,7 +31,17 @@ namespace Teletter.Data
             return tweets;
         }
 
-        public void saveTweet(int userId, string content)
+        public Tweet getTheLastestAddedTweet()
+        {
+            var sql = @"SELECT TOP 1 Content, CreatedAt, UpdatedAt
+                        From Tweets
+                        ORDER BY TweetID DESC";
+            using var connect = new SqlConnection(_configuration.GetConnectionString("TeletterDB"));
+            var tweet = connect.Query<Tweet>(sql).FirstOrDefault();
+            return tweet;
+        }
+
+        public Tweet saveTweet(int userId, string content)
         {
             var param = new DynamicParameters();
             param.Add("@Content", content, DbType.String, ParameterDirection.Input, content.Length);
@@ -41,7 +51,16 @@ namespace Teletter.Data
 
             using var connection = new SqlConnection(_configuration.GetConnectionString("TeletterDB"));
 
-            connection.Execute(sql, param);
+            try
+            {
+                connection.Execute(sql, param);
+            }
+            catch (Exception)
+            {
+                return null;
+            } 
+
+            return getTheLastestAddedTweet();
         }
     }
 }
